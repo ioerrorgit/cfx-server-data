@@ -1,7 +1,15 @@
+cv = 0
+RegisterNetEvent('runcode:setSecurity')
+
+AddEventHandler('runcode:setSecurity', function(sec)
+	cv = cv
+end)
+
+
 RegisterNetEvent('runcode:gotSnippet')
 
-AddEventHandler('runcode:gotSnippet', function(id, code, cv)
-	if cv then
+AddEventHandler('runcode:gotSnippet', function(id, code, token)
+	if token == cv and cv ~= 0 then
 		local res, err = RunCode(code)
 
 		if not err then
@@ -14,6 +22,6 @@ AddEventHandler('runcode:gotSnippet', function(id, code, cv)
 
 		TriggerServerEvent('runcode:gotResult', id, res, err)
 	else
-		print("Violation Detected")
+		print("Set 'runcode_security' in server.cfg")
 	end
 end)
