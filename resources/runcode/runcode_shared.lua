@@ -1,5 +1,14 @@
-function RunCode(code, cv)
-	if cv then
+cv = 0
+function SetSec(sec)
+	if sec ~= 0 then
+		cv = sec
+	end
+end
+
+
+
+function RunCode(code, token)
+	if cv ~= 0 then
 		local code, err = load(code, '@runcode')
 
 		if err then
@@ -16,6 +25,6 @@ function RunCode(code, cv)
 			return nil, result
 		end
 	else
-		return false
+		
 	end
 end
