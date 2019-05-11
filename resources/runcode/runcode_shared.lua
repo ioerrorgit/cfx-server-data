@@ -1,17 +1,21 @@
-function RunCode(code)
-	local code, err = load(code, '@runcode')
+function RunCode(code, cv)
+	if cv then
+		local code, err = load(code, '@runcode')
 
-	if err then
-		print(err)
-		return nil, err
-	end
+		if err then
+			print(err)
+			return nil, err
+		end
 
-	local status, result = pcall(code)
-	print(result)
+		local status, result = pcall(code)
+		print(result)
 
-	if status then
-		return result
+		if status then
+			return result
+		else
+			return nil, result
+		end
 	else
-		return nil, result
+		return false
 	end
 end
